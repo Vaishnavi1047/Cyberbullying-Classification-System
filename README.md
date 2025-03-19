@@ -72,19 +72,19 @@ graph LR;
 ---
 
 ## **💡 Key Features**
-✅ **Real-time text analysis**
-✅ **BERT-based deep learning model** for high accuracy
-✅ **Interactive UI** using Streamlit
-✅ **Confidence score display**
-✅ **Easy deployment**
+✅ **Real-time text analysis**    
+✅ **BERT-based deep learning model** for high accuracy    
+✅ **Interactive UI** using Streamlit    
+✅ **Confidence score display**    
+✅ **Easy deployment**    
 
 ---
 
 ## **🔮 Future Enhancements**
-🔧 **Improve explainability** by highlighting bullying-related words.
-🔧 **Fine-tune the model** with larger real-world datasets.
-🔧 **Multi-language support** using **mBERT**.
-🔧 **Deploy as an API** for real-time monitoring in social media applications.
+🔧 **Improve explainability** by highlighting bullying-related words.        
+🔧 **Fine-tune the model** with larger real-world datasets.    
+🔧 **Multi-language support** using **mBERT**.    
+🔧 **Deploy as an API** for real-time monitoring in social media applications.    
 
 ---
 
