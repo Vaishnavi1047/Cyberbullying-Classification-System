@@ -9,6 +9,8 @@ class BERT_model:
         self.tokenizer = BertTokenizer.from_pretrained(tokenizer)
         self.model = BertForSequenceClassification.from_pretrained(model_name,num_labels=2).to(self.device)
 
+
+
 def train_model(self, train_dataloader, val_dataloader, epochs=10):
     optimizer = torch.optim.AdamW(self.model.parameters(), lr=2e-5)
     best_val_loss = float('inf')
@@ -39,6 +41,38 @@ def train_model(self, train_dataloader, val_dataloader, epochs=10):
         avg_train_loss = total_train_loss / len(train_dataloader)
         print(f'\nEpoch {epoch + 1}:')
         print(f'Average training loss: {avg_train_loss:.4f}')
+        # Validating the training process
+        self.model.eval()
+        total_val_loss = 0
+        val_predictions = []
+        val_true_labels = []
+
+        with torch.no_grad():
+            for batch in val_dataloader:
+                input_ids = batch['input_ids'].to(self.device)
+                attention_mask = batch['attention_mask'].to(self.device)
+                labels = batch['labels'].to(self.device)
+
+                outputs = self.model(
+                    input_ids=input_ids,
+                    attention_mask=attention_mask,
+                    labels=labels
+                )
+
+                loss = outputs.loss
+                total_val_loss += loss.item()
+
+                predictions = torch.argmax(outputs.logits, dim=-1)
+                val_predictions.extend(predictions.cpu().numpy())
+                val_true_labels.extend(labels.cpu().numpy())
+
+        avg_val_loss = total_val_loss / len(val_dataloader)
+
+        print(f'Average validation loss: {avg_val_loss:.4f}')
+        print('\nValidation Classification Report:')
+        print(classification_report(val_true_labels, val_predictions,
+                                    target_names=['Not Bullying', 'Bullying']))
+
 
 
  def save_model(self,output_dir='cyberbullying_model/'):
